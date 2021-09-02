@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Role, type: :model do
+  context 'Associations' do
+    it { should belong_to(:tenant) }
+    it { should have_many(:users) }
+    it { should have_many(:role_permissions) }
+    it { should have_many(:permissions).through(:role_permissions) }
+  end
+
   context 'Validations' do
     subject { build(:role) }
 

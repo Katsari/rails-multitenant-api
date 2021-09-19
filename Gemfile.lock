@@ -54,6 +54,9 @@ GEM
     activerecord (6.1.4.1)
       activemodel (= 6.1.4.1)
       activesupport (= 6.1.4.1)
+    activerecord-multi-tenant (1.1.1)
+      rails (>= 4.2)
+      request_store (>= 1.0.5)
     activestorage (6.1.4.1)
       actionpack (= 6.1.4.1)
       activejob (= 6.1.4.1)
@@ -142,6 +145,18 @@ GEM
     jsonapi-renderer (0.2.2)
     jsonapi-serializable (0.3.1)
       jsonapi-renderer (~> 0.2.0)
+    kaminari (1.2.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.1)
+      kaminari-activerecord (= 1.2.1)
+      kaminari-core (= 1.2.1)
+    kaminari-actionview (1.2.1)
+      actionview
+      kaminari-core (= 1.2.1)
+    kaminari-activerecord (1.2.1)
+      activerecord
+      kaminari-core (= 1.2.1)
+    kaminari-core (1.2.1)
     listen (3.7.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -159,7 +174,6 @@ GEM
     nokogiri (1.12.3-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    pagy (4.11.0)
     parallel (1.20.1)
     parser (3.0.2.0)
       ast (~> 2.4.1)
@@ -206,6 +220,8 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (2.1.1)
+    request_store (1.5.0)
+      rack (>= 1.4)
     rescue_registry (0.3.0)
       activesupport (>= 5.0)
     responders (3.0.1)
@@ -275,6 +291,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activerecord-multi-tenant (~> 1.1)
   amazing_print (~> 1.3)
   bootsnap (>= 1.4.4)
   byebug
@@ -287,8 +304,8 @@ DEPENDENCIES
   graphiti (~> 1.3)
   graphiti-rails
   graphiti_spec_helpers
+  kaminari (~> 1.2)
   listen (~> 3.3)
-  pagy (~> 4.11)
   pg (~> 1.2)
   puma (~> 5.0)
   rack-attack

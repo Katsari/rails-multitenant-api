@@ -28,14 +28,12 @@ ActiveRecord::Schema.define(version: 2021_09_01_202415) do
   end
 
   create_table "role_permissions", force: :cascade do |t|
-    t.bigint "tenant_id", null: false
     t.bigint "role_id", null: false
     t.bigint "permission_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["permission_id"], name: "index_role_permissions_on_permission_id"
     t.index ["role_id"], name: "index_role_permissions_on_role_id"
-    t.index ["tenant_id"], name: "index_role_permissions_on_tenant_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -43,7 +41,7 @@ ActiveRecord::Schema.define(version: 2021_09_01_202415) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_roles_on_name", unique: true
+    t.index ["name", "tenant_id"], name: "index_roles_on_name_and_tenant_id", unique: true
     t.index ["tenant_id"], name: "index_roles_on_tenant_id"
   end
 
@@ -51,6 +49,7 @@ ActiveRecord::Schema.define(version: 2021_09_01_202415) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_tenants_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -86,7 +85,6 @@ ActiveRecord::Schema.define(version: 2021_09_01_202415) do
   add_foreign_key "permissions", "tenants"
   add_foreign_key "role_permissions", "permissions"
   add_foreign_key "role_permissions", "roles"
-  add_foreign_key "role_permissions", "tenants"
   add_foreign_key "roles", "tenants"
   add_foreign_key "users", "roles"
   add_foreign_key "users", "tenants"

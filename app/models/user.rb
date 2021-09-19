@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  belongs_to :tenant
+  multi_tenant :tenant
+
   belongs_to :role
 
   validates :username, :email, :name, presence: true

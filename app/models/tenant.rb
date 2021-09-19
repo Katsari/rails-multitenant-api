@@ -1,4 +1,6 @@
 class Tenant < ApplicationRecord
+  multi_tenant :tenant
+
   validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 50 }
 
   has_many :users

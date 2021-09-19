@@ -34,6 +34,7 @@ class CreateRlsFunctions < ActiveRecord::Migration[6.1]
 
   def self.down
     connection.execute <<-SQL
+      DROP FUNCTION IF EXISTS current_user_id CASCADE;
       DROP FUNCTION IF EXISTS current_tenant_id CASCADE;
       DROP FUNCTION IF EXISTS rls_disabled CASCADE;
      SQL

@@ -2,12 +2,13 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
 
-# Create first permission to manage everything in the app, Super Admin role and user with this role
+# Set current tenant
 tenant = Tenant.find_or_create_by(name: 'Company')
 RLS.set_tenant tenant
+
+# Create first permission to manage everything in the app, Super Admin role and user with this role
 global_permission = Permission.create(subject_class: 'all', action: 'manage', subject_name: 'All', action_name: 'All', tenant: tenant)
-role = Role.create(name: 'Super Admin', tenant: tenant)
-role.role_permissions.create(tenant: tenant, permission: global_permission)
+role = Role.create(name: 'Super Admin', permissions: [global_permission], tenant: tenant)
 User.create(username: 'admin', name: 'Super Admin', email: 'admin@example.com',
             password: 'strong_password', password_confirmation: 'strong_password',
             role: role, tenant: tenant)

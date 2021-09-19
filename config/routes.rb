@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
-  scope path: V1::APIResource.endpoint_namespace, defaults: { format: :jsonapi } do
-    mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks]
-    mount VandalUi::Engine, at: '/vandal'
+  namespace :api, defaults: { format: :jsonapi } do
+    namespace :v1 do
+      mount VandalUi::Engine, at: '/vandal'
 
-    resources :tenants
+      resources :users
+      resources :roles
+    end
   end
+
+  mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks], controllers: {
+    registrations:      'overrides/registrations',
+    sessions:           'overrides/sessions'
+  }
 end

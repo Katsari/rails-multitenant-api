@@ -21,12 +21,14 @@ gem 'rack-attack'
 # Graphiti helps building Stylish Graph APIs using RESTful Resources
 gem 'graphiti', '~> 1.3'
 gem 'graphiti-rails'
-gem 'pagy', '~> 4.11'
 gem 'vandal_ui'
 gem 'responders', '~> 3.0'
+gem 'kaminari', '~> 1.2'
 
 # Row Level Security (RLS) gives your application a second line of defense when isolating data in a multi-tenant application
 gem 'rls_rails', github: 'sbiastoch/rls_rails'
+# ActiveRecord/Rails integration for multi-tenant databases, adds tenant context to your queries
+gem 'activerecord-multi-tenant', '~> 1.1'
 
 # Simple, multi-client and secure token-based authentication
 gem 'devise', '~> 4.8'

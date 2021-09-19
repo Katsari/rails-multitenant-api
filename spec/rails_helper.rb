@@ -50,6 +50,9 @@ RSpec.configure do |config|
   config.include Requests::AuthHelpers::Includables, type: :request
   config.extend Requests::AuthHelpers::Extensions, type: :request
 
+  # This will include ApiHelper module in all requests and api specs
+  config.include ApiHelper, type: :request
+
   # Raise errors during tests by default, bypassing any rescue logic
   config.before :each do
     # GraphitiErrors.disable!

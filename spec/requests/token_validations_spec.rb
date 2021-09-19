@@ -6,14 +6,14 @@ RSpec.describe 'Token Validations', type: :request do
     sign_in(:user)
 
     it 'returns success status' do
-      get '/api/v1/auth/validate_token'
+      get '/auth/validate_token'
       expect(response).to have_http_status(:success)
     end
   end
 
   describe 'signed out' do
     it 'returns unauthorized status' do
-      get '/api/v1/auth/validate_token'
+      get '/auth/validate_token'
       expect(response).to have_http_status(:unauthorized)
     end
   end

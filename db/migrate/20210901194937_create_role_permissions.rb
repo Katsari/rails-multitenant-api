@@ -2,7 +2,8 @@ class CreateRolePermissions < ActiveRecord::Migration[6.1]
   def change
     create_table :roles do |t|
       t.references :tenant, null: false, foreign_key: true
-      t.string :name, null: false, index: { unique: true }
+      t.string :name, null: false
+      t.index [:name, :tenant_id], unique: true
 
       t.timestamps
     end
@@ -19,7 +20,6 @@ class CreateRolePermissions < ActiveRecord::Migration[6.1]
     end
 
     create_table :role_permissions do |t|
-      t.references :tenant, null: false, foreign_key: true
       t.references :role, null: false, foreign_key: true
       t.references :permission, null: false, foreign_key: true
 
@@ -28,6 +28,5 @@ class CreateRolePermissions < ActiveRecord::Migration[6.1]
 
     create_policy :roles, version: 1
     create_policy :permissions, version: 1
-    create_policy :role_permissions, version: 1
   end
 end
